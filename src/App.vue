@@ -1,13 +1,18 @@
 <script setup lang="ts">
   import MainWindow from './components/MainWindow.vue'
-  
-  // microsoft teams javascript client sdk
+  import { ref } from 'vue'
   import * as microsoftTeams from "@microsoft/teams-js";
-  console.log(microsoftTeams)
-  console.log(microsoftTeams.app)
+
+ let clientType = ''
+ let userPrincipialName = ''
+ let theme = ''
+  
+ // microsoft teams javascript client sdk
   microsoftTeams.app.initialize().then(() => {
     microsoftTeams.app.getContext().then((context) => {
-      console.log('context: ', context)
+      clientType = context.app.host.clientType
+      userPrincipialName = context.user?.loginHint!
+      theme = context.app.theme
     })
   }).catch((error) => {
     console.log('error in initialization', error)
@@ -16,7 +21,7 @@
 </script>
 
 <template>
-  <MainWindow />
+  <MainWindow clientType="clientType" userPrincipalName="userPrincipalName" theme="theme"/>
 </template>
 
 <style scoped>

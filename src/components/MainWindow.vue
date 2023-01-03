@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { fluentButton, fluentTextField } from '@fluentui/web-components';
 // import { ref } from 'vue'
-// defineProps<{ msg: string }>()
 
+defineProps<{clientType: string, userPrincipalName: string, theme: string}>()
 
 </script>
 
 <template>
     <div class="ms-fontWeight-semibold ms-fontsize-68">MICROSOFT TEAM PERSONAL TAB APPLICATION</div>
+    <div class="ms-fontWeight-semibold ms-fontsize-68">Welcome {{ userPrincipalName }}, thanks for joining from {{ clientType }}</div>
+
     <fluent-card class="ms-depth-64 space">
         <div class="ms-Grid" dir="ltr">
             <div class="ms-Grid-row">
