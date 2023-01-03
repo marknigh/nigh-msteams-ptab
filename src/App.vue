@@ -13,15 +13,17 @@
       clientType = context.app.host.clientType
       userPrincipialName = context.user?.loginHint!
       theme = context.app.theme
+      microsoftTeams.app.notifySuccess()
     })
   }).catch((error) => {
     console.log('error in initialization', error)
+    microsoftTeams.app.notifyFailure(error)
   })
 
 </script>
 
 <template>
-  <MainWindow clientType="clientType" userPrincipalName="userPrincipalName" theme="theme"/>
+  <MainWindow :clientType="clientType" :userPrincipalName="userPrincipialName" :theme="theme"/>
 </template>
 
 <style scoped>
