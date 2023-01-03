@@ -7,7 +7,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => ['fluent-button', 'fluent-text-field'].includes(tag),
+          isCustomElement: (tag) => ['fluent-button', 'fluent-text-field', 'fluent-card'].includes(tag),
         }
       }
     })
