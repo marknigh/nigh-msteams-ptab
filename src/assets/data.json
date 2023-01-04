@@ -1,0 +1,14 @@
+{
+    "collab_wins": [
+        {
+            "customer": "DFA",
+            "revenue": "$15k",
+            "gp": "$3k"
+        },
+        {
+            "customer": "Bunge",
+            "revenue": "$25k",
+            "gp": "$4k"
+        }
+    ]
+}
