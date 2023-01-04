@@ -1,10 +1,6 @@
 <script setup lang="ts">
 
-  const wins =  defineProps([
-        'customer',
-        'revenue',
-        'gp'
-])
+  defineProps(['wins'])
 
 </script>
 
@@ -12,10 +8,10 @@
   <div class="content">
     <h2 class="has-text-centered">BIG WINS</h2>
     <dl class="px-6">
-      <dt v-for="(item, index) in wins" :key="index">
-          <span class="has-text-weight-bold">{{ item.customer }}</span>
-          <dd> Revenue: {{ item.revenue }}</dd>
-          <dd> Gross Profit: {{ item.gp }}</dd>
+      <dt v-for="w in wins">
+          <span class="has-text-weight-bold">{{ w.customer }}</span>
+          <dd> Revenue: {{ w.revenue }}</dd>
+          <dd> Gross Profit: {{ w.gp }}</dd>
       </dt>
     </dl>
   </div>
