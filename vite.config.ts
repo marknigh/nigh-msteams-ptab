@@ -5,11 +5,6 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [
     vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => ['fluent-button', 'fluent-text-field', 'fluent-card'].includes(tag),
-        }
-      }
     })
   ],
 })
