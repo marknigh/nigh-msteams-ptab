@@ -31,7 +31,7 @@
     microsoftTeams.app.notifyFailure(error)
   })
 
-  function save_win(data){
+  function save_win(data: { customer: '', revenue: '', gp: '' }){
     console.log(data)
     collabWins.value.push(data)
   }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-    defineProps<{wins: [{
-        'customer': string,
-        'revenue': string,
-        'gp': string
-    }]}>()
+  const wins =  defineProps([
+        'customer',
+        'revenue',
+        'gp'
+])
 
 </script>
 
