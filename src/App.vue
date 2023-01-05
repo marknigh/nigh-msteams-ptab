@@ -13,9 +13,9 @@
   import * as microsoftTeams from "@microsoft/teams-js";
   
   let collabWins = ref(collab_wins)
-  let clientType = ref('desktop')
-  let userPrincipialName = ref('mark@marknigh.com')
-  let theme = ref('c')
+  let clientType = ref('')
+  let userPrincipialName = ref('')
+  let theme = ref('')
   
  // microsoft teams javascript client sdk
   microsoftTeams.app.initialize().then(() => {
@@ -31,8 +31,8 @@
     microsoftTeams.app.notifyFailure(error)
   })
 
-  function save_win(data: { customer: '', revenue: '', gp: '' }){
-    collabWins.value.push(data)
+  function save_win(data: any){
+    collabWins.value.push({...data.value})
   }
 
 </script>
