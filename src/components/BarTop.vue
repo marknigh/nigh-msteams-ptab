@@ -1,15 +1,16 @@
 <script setup lang="ts">
-    
-    defineProps<{clientType: string, userPrincipalName: string, theme: string}>()
+import { app }from "@microsoft/teams-js";
+
+const context = await app.getContext()
 
 </script>
 
 <template>
     <section class="section">
         <a href="https://cdw.com">
-            <img src="https://webobjects2.cdw.com/is/image/CDW/logo-cdw-no-tag?wid=64&hei=64&fmt=webp,,lossless">
-            </a>
+            <img src="../assets/CDW-logo.png">
+        </a>
         <p class="title"> CDW BIG WINS!! </p>
-        <p class="subtitle"> WELCOME, {{ userPrincipalName }}!! Thanks for logging in from your {{ clientType }}.</p>
+        <p class="subtitle"> WELCOME, {{ context.user?.userPrincipalName }}!! Thanks for logging in from your {{ context.app.host.clientType }}.</p>
     </section>
 </template>

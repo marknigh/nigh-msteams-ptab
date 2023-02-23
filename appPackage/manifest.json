@@ -1,0 +1,48 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "version": "2.0.0",
+    "manifestVersion": "1.16",
+    "id": "067bb675-8eb7-4480-be7f-9c79ba144f51",
+    "packageName": "com.marknigh.tabapp",
+    "name": {
+      "short": "Nigh Teams Tab",
+      "full": ""
+    },
+    "developer": {
+      "name": "Nigh Development",
+      "mpnId": "",
+      "websiteUrl": "https://marknigh.com",
+      "privacyUrl": "https://marknigh.com/privacy",
+      "termsOfUseUrl": "https://marknigh.com/terms"
+    },
+    "description": {
+      "short": "This is my first tab app with a short description",
+      "full": "this is my first tab application written in vue for the long description"
+    },
+    "icons": {
+      "outline": "cdw-outline.png",
+      "color": "cdw-color.png"
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+      {
+        "entityId": "9d310546-d4ba-4f85-840b-bce17e325e2d",
+        "name": "Nigh",
+        "contentUrl": "https://921a-162-236-95-71.ngrok.io",
+        "websiteUrl": "https://921a-162-236-95-71.ngrok.io",
+        "scopes": [
+          "personal"
+        ]
+      }
+    ],
+    "webApplicationInfo": {
+      "id": "5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d",
+      "resource": "api://921a-162-236-95-71.ngrok.io/5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d"
+    },
+    "validDomains": [],
+    "authorization": {
+      "permissions": {
+        "resourceSpecific": []
+      }
+    }
+  }
