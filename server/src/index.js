@@ -5,22 +5,19 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const msal = require('@azure/msal-node');
+require('dotenv').config()
 
 // Creating MSAL client
 const msalClient = new msal.ConfidentialClientApplication({
   auth: {
-    clientId: '5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d',
-    clientSecret: 'SlP8Q~MbWdLPJcb1Dd89b7uL_0~vaM-lNh5rIbQK'
+    clientID: process.env.clientId,
+    clientSecret: process.env.clientSecret
   }
 });
 // import node-fetch
 const fetch = require('node-fetch')
 // defining the Express app
 const app = express();
-// defining an array to work as the database (temporary solution)
-const ads = [
-  {title: 'Hello, world (again)!'}
-];
 
 // adding Helmet to enhance your Rest API's security
 app.use(helmet());
@@ -34,9 +31,9 @@ app.use(cors());
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
-// defining an endpoint to return all ads
-app.get('/', (req, res) => {
-  res.send(ads);
+// defining an endpoint to return to test once deployed to azure
+app.get('/test', (req, res) => {
+  res.send('Hello World');
 });
 
 app.post('/getProfileOnBehalfOf', function (req, res) {
