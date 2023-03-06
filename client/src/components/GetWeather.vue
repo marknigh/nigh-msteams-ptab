@@ -3,7 +3,7 @@
 import { onBeforeMount, ref } from 'vue'
 
 const city = ref('Chicago')
-let context = ref({})
+let context = ref('')
 let weather = ref('')
 let temp = ref()
 let input_disable = ref(true)

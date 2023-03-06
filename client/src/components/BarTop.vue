@@ -3,11 +3,11 @@
     import { onBeforeMount, ref } from "vue";
     import { Auth } from '../assets/sso_auth'
 
-    const profile = ref({})
+    const profile = ref({ 'displayName': ''})
     onBeforeMount(() => {
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
-            app.getContext().then((context) => {
+            app.getContext().then((context: any) => {
                 fetch('http://127.0.0.1:3001/getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
