@@ -19,8 +19,8 @@ const fetch = require('node-fetch')
 // defining the Express app
 const app = express();
 
-// adding Helmet to enhance your Rest API's security
-app.use(helmet());
+// // adding Helmet to enhance your Rest API's security
+// app.use(helmet());
 
 // using bodyParser to parse JSON bodies into JS objects
 app.use(bodyParser.json());
@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 // enabling CORS for all requests
 app.use(cors());
 
-// adding morgan to log HTTP requests
-app.use(morgan('combined'));
+// // adding morgan to log HTTP requests
+// app.use(morgan('combined'));
 
 // defining an endpoint to return to test once deployed to azure
 app.get('/test', (req, res) => {
