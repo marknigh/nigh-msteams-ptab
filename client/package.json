@@ -13,6 +13,8 @@
     "@vitejs/plugin-react": "^3.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "bulma-fluent": "^0.4.3",
+    "express-generator": "^4.16.1",
+    "fetch": "^1.1.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {

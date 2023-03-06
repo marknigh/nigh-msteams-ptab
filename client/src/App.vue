@@ -7,7 +7,8 @@
   import DisplayCollabWins from './components/DisplayCollabWins.vue'
   import BarTop from './components/BarTop.vue'
   import BarBottom from './components/BarBottom.vue'
-
+  import GetWeather from './components/GetWeather.vue'
+  
   // data to be used as a starting point. 
   import { collab_wins } from './assets/data.json'
 
@@ -21,9 +22,24 @@
 </script>
 
   <template>
-    <Suspense>
-      <bar-top />
-    </Suspense>
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <Suspense>
+          <bar-top />
+          <template #fallback>
+            Loading...
+          </template> 
+        </Suspense>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <Suspense>
+            <get-weather />
+          </Suspense>
+        </div>
+      </div>
+    </nav>
+
     <div class="container">
       <div class="columns is-variable is-8">
         <div class="column is-half">

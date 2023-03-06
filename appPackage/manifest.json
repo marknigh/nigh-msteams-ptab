@@ -28,8 +28,8 @@
       {
         "entityId": "9d310546-d4ba-4f85-840b-bce17e325e2d",
         "name": "Nigh",
-        "contentUrl": "https://921a-162-236-95-71.ngrok.io",
-        "websiteUrl": "https://921a-162-236-95-71.ngrok.io",
+        "contentUrl": "https://e8eb-162-236-95-71.ngrok.io",
+        "websiteUrl": "https://e8eb-162-236-95-71.ngrok.io",
         "scopes": [
           "personal"
         ]
@@ -37,7 +37,7 @@
     ],
     "webApplicationInfo": {
       "id": "5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d",
-      "resource": "api://921a-162-236-95-71.ngrok.io/5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d"
+      "resource": "api://e8eb-162-236-95-71.ngrok.io/5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d"
     },
     "validDomains": [],
     "authorization": {

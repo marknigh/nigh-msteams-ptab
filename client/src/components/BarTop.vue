@@ -1,0 +1,52 @@
+<script setup lang="ts">
+    import { app }from "@microsoft/teams-js";
+    import { onBeforeMount, ref } from "vue";
+    import { Auth } from '../assets/sso_auth'
+
+    const profile = ref({})
+    onBeforeMount(() => {
+        const microsoftTeams = new Auth()
+        microsoftTeams.get_token().then((token) => {
+            app.getContext().then((context) => {
+                fetch('http://127.0.0.1:3001/getProfileOnBehalfOf', {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        'tid': context.user.tenant.id,
+                        'token': token
+                    }),
+                    mode: 'cors',
+                    cache: 'default'
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        console.log('error')
+                    }
+                })
+                .then((responseJson) => {
+                    if (responseJson.error) {
+                        console.log('error')
+                    } else {
+                        profile.value = responseJson;
+                        console.log('profile: ', profile.value)
+                    }
+                })
+            })
+        })    
+    }) 
+
+</script>
+
+<template>
+    <section class="section">
+        <a href="https://cdw.com">
+            <img src="../assets/CDW-logo.png">
+        </a>
+        <p class="title"> CDW BIG WINS!! </p>
+        <p class="title2"> WELCOME, {{ profile.displayName }}!! </p>
+    </section>
+</template>
