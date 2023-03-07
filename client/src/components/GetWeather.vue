@@ -22,7 +22,7 @@ function cityBlur() {
 }
 
 function getWeather() {
-    fetch('http://127.0.0.1:3001/weather/' + city.value)
+    fetch('http://nigh-teams-ptab-webapp.azurewebsites.net/weather/' + city.value)
     .then((response) => {
        return response.json()
     }).then((data) => {
