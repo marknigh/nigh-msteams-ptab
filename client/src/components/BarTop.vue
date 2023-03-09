@@ -17,8 +17,7 @@
                         'tid': context.user.tenant.id,
                         'token': token
                     }),
-                    mode: 'no-cors',
-                    cache: 'default'
+                    mode: 'no-cors'
                 })
                 .then((response) => {
                     if (response.ok) {
@@ -29,7 +28,7 @@
                 })
                 .then((responseJson) => {
                     if (responseJson.error) {
-                        console.log('error')
+                        console.log('error', responseJson)
                     } else {
                         profile.value = responseJson;
                         console.log('profile: ', profile.value)
