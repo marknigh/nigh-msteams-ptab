@@ -8,7 +8,7 @@
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
             app.getContext().then((context: any) => {
-                fetch('http://nigh-teams-ptab-webapp.azurewebsites.net/getProfileOnBehalfOf', {
+                fetch('https://nigh-teams-ptab-webapp.azurewebsites.net/getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
