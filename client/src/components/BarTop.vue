@@ -17,7 +17,7 @@
                         'tid': context.user.tenant.id,
                         'token': token
                     }),
-                    mode: 'cors',
+                    mode: 'no-cors',
                     cache: 'default'
                 })
                 .then((response) => {
