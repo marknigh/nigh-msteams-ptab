@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/getProfileOnBehalfOf', function (req, res) {
+router.post('/', function (req, res) {
     var tid = req.body.tid;
     var token = req.body.token;
     var scopes = ["https://graph.microsoft.com/User.Read"];

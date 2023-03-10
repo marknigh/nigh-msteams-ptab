@@ -23,16 +23,17 @@ function cityBlur() {
 
 function getWeather() {
     fetch('https://nigh-teams-ptab-web-service.azurewebsites.net/weather/' + city.value)
-    .then((response) => {
-        console.log('fetch->weather: ', response.json())
-       return response.json()
-    }).then((data) => {
-        weather.value = data.weather[0].main
-        temp.value = Math.round(data.main.temp)
-        context.value = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
-    }).catch((error) => {
-        console.log('fetch->weather->error ', error)
-    })
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            weather.value = data.weather[0].main
+            temp.value = Math.round(data.main.temp)
+            context.value = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
+        })
+        .catch((error) => {
+            console.log('fetch->weather->error ', error)
+        })
 }
 </script>
 
