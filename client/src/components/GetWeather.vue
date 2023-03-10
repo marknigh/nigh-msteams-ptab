@@ -23,16 +23,17 @@ function cityBlur() {
 
 function getWeather() {
     fetch('https://nigh-teams-ptab-webapp.azurewebsites.net/weather/' + city.value, {
-        'mode': 'no-cors'
+        'mode': 'cors'
     })
     .then((response) => {
+        console.log('fetch->weather: ', response.json())
        return response.json()
     }).then((data) => {
         weather.value = data.weather[0].main
         temp.value = Math.round(data.main.temp)
         context.value = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
     }).catch((error) => {
-        console.log('error: ', error)
+        console.log('fetch->weather->error ', error)
     })
 }
 </script>
