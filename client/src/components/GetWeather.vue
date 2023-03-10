@@ -22,7 +22,7 @@ function cityBlur() {
 }
 
 function getWeather() {
-    fetch('https://nigh-teams-ptab-webapp.azurewebsites.net/weather/' + city.value)
+    fetch('https://nigh-teams-ptab-web-service.azurewebsites.net/weather/' + city.value)
     .then((response) => {
         console.log('fetch->weather: ', response.json())
        return response.json()

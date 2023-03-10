@@ -9,7 +9,7 @@
         microsoftTeams.get_token().then((token) => {
             console.log(token)
             app.getContext().then((context: any) => {
-                fetch('https://nigh-teams-ptab-webapp.azurewebsites.net/getProfileOnBehalfOf', {
+                fetch('https://nigh-teams-ptab-web-service.azurewebsites.net/getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
