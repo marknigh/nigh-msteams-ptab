@@ -17,8 +17,7 @@
                     body: JSON.stringify({
                         'tid': context.user.tenant.id,
                         'token': token
-                    }),
-                    mode: 'cors'
+                    })
                 })
                 .then((response) => {
                     if (response.ok) {
