@@ -12,7 +12,6 @@ router.get('/:city', (req, res, next) => {
       
     fetch(url).then(res => res.json())
     .then((results) => {
-        console.log(results)
         res.status(200).send(results)
     })
 });
