@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const msal = require('@azure/msal-node');
-var fetch = require('node-fetch')
 
 router.post('/', function (req, res) {
   console.log('post to getProfileOnBehalfOf', req.body)
@@ -22,7 +21,7 @@ router.post('/', function (req, res) {
       authority: `https://login.microsoftonline.com/${tid}`,
       oboAssertion: token,
       scopes: scopes,
-      skipCache: true
+      skipCache: false
     })
     .then(result => {
       console.log('msalClient->result: ', result)

@@ -1,17 +1,16 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-
   // import child components
   import InputCollabWins from './components/InputCollabWins.vue'
   import DisplayCollabWins from './components/DisplayCollabWins.vue'
   import BarTop from './components/BarTop.vue'
   import BarBottom from './components/BarBottom.vue'
   import GetWeather from './components/GetWeather.vue'
-  
+  import ProfilePicture from './components/ProfilePicture.vue'
+
   // data to be used as a starting point. 
   import { collab_wins } from './assets/data.json'
-
  
   let collabWins = ref(collab_wins)
   
@@ -24,6 +23,9 @@
   <template>
     <nav class="level">
       <div class="level-item has-text-centered">
+        <Suspense>
+          <profile-picture/>
+        </Suspense>
         <Suspense>
           <bar-top />
           <template #fallback>

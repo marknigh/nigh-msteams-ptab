@@ -7,6 +7,7 @@
     onBeforeMount(() => {
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
+            console.log('token: ', token)
             app.getContext().then((context: any) => {
                 fetch('https://nigh-teams-ptab-web-service.azurewebsites.net/getProfileOnBehalfOf', {
                     method: 'post',
