@@ -4,12 +4,14 @@
     import { Auth } from '../assets/sso_auth'
 
     const profile = ref({ 'displayName': ''})
+
+    const api_url = import.meta.env.VITE_API_URL
+
     onBeforeMount(() => {
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
-            console.log('token: ', token)
             app.getContext().then((context: any) => {
-                fetch('https://nigh-teams-ptab-web-service.azurewebsites.net/getProfileOnBehalfOf', {
+                fetch(api_url + 'getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'

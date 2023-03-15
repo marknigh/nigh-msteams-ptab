@@ -1,23 +1,15 @@
 var express = require('express');
 var router = express.Router();
-const msal = require('@azure/msal-node');
 var fetch = require('node-fetch')
 
 router.post('/', function (req, res) {
-    // Creating MSAL client
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: process.env.CLIENT_ID,
-            clientSecret: process.env.CLIENT_SECRET
-        }
-    });
 
     var tid = req.body.tid;
     var token = req.body.token;
     var scopes = ["https://graph.microsoft.com/User.Read"];
     
     var oboPromise = new Promise ((resolve, reject) => {
-        msalClient.acquireTokenOnBehalfOf({
+        req.app.locals.msalClient.acquireTokenOnBehalfOf({
             authority: `https://login.microsoftonline.com/${tid}`,
             oboAssertion: token,
             scopes: scopes,

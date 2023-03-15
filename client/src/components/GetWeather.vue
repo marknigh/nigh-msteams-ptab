@@ -1,40 +1,41 @@
 <script setup lang="ts">
+    import { onBeforeMount, ref } from 'vue'
 
-import { onBeforeMount, ref } from 'vue'
+    const city = ref('Chicago')
+    let context = ref('')
+    let weather = ref('')
+    let temp = ref()
+    let input_disable = ref(true)
+    
+    const api_url = import.meta.env.VITE_API_URL
 
-const city = ref('Chicago')
-let context = ref('')
-let weather = ref('')
-let temp = ref()
-let input_disable = ref(true)
+    onBeforeMount(() => {
+        getWeather()
+    })
 
-onBeforeMount(() => {
-    getWeather()
-})
+    function changeCity() {
+        input_disable.value = false
+    }
 
-function changeCity() {
-    input_disable.value = false
-}
+    function cityBlur() {
+        getWeather()
+        input_disable.value = true
+    }
 
-function cityBlur() {
-    getWeather()
-    input_disable.value = true
-}
-
-function getWeather() {
-    fetch('https://nigh-teams-ptab-web-service.azurewebsites.net/weather/' + city.value)
-        .then((response) => {
-            return response.json()
-        })
-        .then((data) => {
-            weather.value = data.weather[0].main
-            temp.value = Math.round(data.main.temp)
-            context.value = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
-        })
-        .catch((error) => {
-            console.log('fetch->weather->error ', error)
-        })
-}
+    function getWeather() {
+        fetch(api_url + '/weather/' + city.value)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                weather.value = data.weather[0].main
+                temp.value = Math.round(data.main.temp)
+                context.value = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
+            })
+            .catch((error) => {
+                console.log('fetch->weather->error ', error)
+            })
+    }
 </script>
 
 <template>
