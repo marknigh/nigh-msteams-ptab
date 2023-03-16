@@ -8,6 +8,7 @@
   import BarBottom from './components/BarBottom.vue'
   import GetWeather from './components/GetWeather.vue'
   import ProfilePicture from './components/ProfilePicture.vue'
+  import CalendarEvent from './components/CalendarView.vue'
 
   // data to be used as a starting point. 
   import { collab_wins } from './assets/data.json'
@@ -21,26 +22,22 @@
 </script>
 
   <template>
-    <nav class="level">
-      <div class="level-item has-text-centered">
+    <div class="container">
+      <div class="columns is-variable is-8">
         <Suspense>
           <profile-picture/>
         </Suspense>
         <Suspense>
-          <bar-top />
-          <template #fallback>
-            Loading...
-          </template> 
+          <bar-top/>
         </Suspense>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
+        <Suspense>
+          <calendar-event/>
+        </Suspense>
           <Suspense>
             <get-weather />
           </Suspense>
-        </div>
       </div>
-    </nav>
+    </div>
 
     <div class="container">
       <div class="columns is-variable is-8">
