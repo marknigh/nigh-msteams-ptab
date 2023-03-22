@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <section class="section">
         <figure class="image is-128x128">
             <img class="is-rounded" :src="profilePhoto">
         </figure>
-    </div>
+    </section>
 </template>
 
 <script setup lang="ts">
@@ -18,7 +18,7 @@
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
             app.getContext().then((context: any) => {
-                fetch(api_url + '/getProfilePhoto', {
+                fetch(api_url + 'getProfilePhoto', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
@@ -34,8 +34,12 @@
                     })
                     
                 })
+            }).catch((error) => {
+                console.log('app.getContext(): ', error)
             })
-        })    
+        }).catch((error) => {
+            console.log('microsoftTeams.get_token: ', error)
+        }) 
     }) 
 
 </script>

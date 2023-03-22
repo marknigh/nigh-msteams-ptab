@@ -9,13 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@azure/msal-browser": "^2.34.0",
     "@microsoft/teams-js": "^2.6.1",
     "@vitejs/plugin-react": "^3.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "bulma-fluent": "^0.4.3",
     "express-generator": "^4.16.1",
     "fetch": "^1.1.0",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

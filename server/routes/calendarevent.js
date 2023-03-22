@@ -1,49 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var fetch = require('node-fetch')
+var getCalendarEvents = require('../calendarEventService');
+var getOboAccessToken = require('../oboService');
 
-router.get('/', function (req, res) {
+router.post('/', async (req, res) => {
 
-    var tid = req.body.tid;
-    var token = req.body.token;
-    var scopes = ["https://graph.microsoft.com/Calendars.Read"];
+    const INTERACTION_REQUIRED_STATUS_TEXT = "interaction_required";
+    const tenantId = req.body.tid;
+    const clientSideToken = req.body.token;
+
     
-    var oboPromise = new Promise ((resolve, reject) => {
-        req.app.locals.msalClient.acquireTokenOnBehalfOf({
-            authority: `https://login.microsoftonline.com/${tid}`,
-            oboAssertion: token,
-            scopes: scopes,
-            skipCache: false
-        })
-        .then(result => {
-            fetch("https://graph.microsoft.com/v1.0/me/calendar/events",
-            {
-                method: 'GET',
-                headers: {
-                "Prefer: outlook.timezone": "CDT",
-                "authorization": "bearer " + result.accessToken
-                },
-                encoding: null
-            })
-            .then((response) => {
-                if (response.ok) {
-                   return response.json()
-                } else {
-                    throw (`Error ${response.status}: ${response.statusText}`);
-                }
-            })
-            .then((results) => {
-                resolve(results)
-            })
-        })
-        .catch(error => {
-            reject({ "error": error });
-        });
-    })
-    oboPromise.then((calendar_event) => {
-        res.status(200).send(calendar_event)
-    })
-
-});  
+    try{
+        const serverSideToken = await getOboAccessToken(tenantId, clientSideToken, req)
+        const calendarEvents = await getCalendarEvents(serverSideToken);
+        res.send(calendarEvents)
+    }
+    catch (error) {
+        if (error.errorCode == 'invalid_grant') {
+            console.log('Interaction required');
+            res.status(401).json({ status: 401, statusText: INTERACTION_REQUIRED_STATUS_TEXT });
+          } else {
+            console.log(`Error in /calendarevents handling: ${error}`);
+            res.status(500).json({ status: 500, statusText: error })
+          }
+        }
+    });  
 
 module.exports = router;

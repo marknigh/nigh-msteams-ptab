@@ -16,8 +16,8 @@
       "termsOfUseUrl": "https://marknigh.com/terms"
     },
     "description": {
-      "short": "This is my first tab app with a short description",
-      "full": "this is my first tab application written in vue for the long description"
+      "short": "MS Teams Personal TAB Application",
+      "full": "MS Teams Personal TAB application that displays information about the current user, profile picture and the ability to change the location of the weather. User can submit 'big wins'"
     },
     "icons": {
       "outline": "cdw-outline.png",
@@ -28,8 +28,8 @@
       {
         "entityId": "9d310546-d4ba-4f85-840b-bce17e325e2d",
         "name": "Nigh",
-        "contentUrl": "https://brave-sea-0880b8210.2.azurestaticapps.net",
-        "websiteUrl": "https://brave-sea-0880b8210.2.azurestaticapps.net",
+        "contentUrl": "https://165e-162-236-95-71.ngrok.io",
+        "websiteUrl": "https://165e-162-236-95-71.ngrok.io",
         "scopes": [
           "personal"
         ]
@@ -37,7 +37,7 @@
     ],
     "webApplicationInfo": {
       "id": "5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d",
-      "resource": "api://brave-sea-0880b8210.2.azurestaticapps.net/5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d"
+      "resource": "api://165e-162-236-95-71.ngrok.io/5b8d440a-1f75-4c7e-901d-a9c6c80a6e5d"
     },
     "validDomains": ["*.azurestaticapps.net"],
     "authorization": {

@@ -18,4 +18,16 @@ export class Auth {
   async get_token(){
     return await microsoftTeams.authentication.getAuthToken()
   }
+
+  async authentication(){
+    return await microsoftTeams.authentication.authenticate({
+      url: window.open('http://localhost:5173/auth-start'),
+      successCallback: (result) => {
+        return(result)
+      },
+      failureCallback: (error) => {
+        return (error)
+      }
+    })
+  }
 }

@@ -1,15 +1,19 @@
 <template>
-    <div>
-        <section class="section">this worked</section>
-    </div>
+    <section class="section">
+        <p class="title2 has-text-weight-bold"> Today's Appointment</p>
+        <p v-for="event in events">
+            {{ event.subject }}
+        </p>
+    </section>
 </template>
 
 <script setup lang="ts">
-    import { app }from "@microsoft/teams-js";
-    import { onBeforeMount, ref } from "vue";
+    import { app }from "@microsoft/teams-js"
+    import { onBeforeMount, reactive } from "vue"
     import { Auth } from '../assets/sso_auth'
+    import * as msal from "@azure/msal-browser"
 
-    const event = ref({})
+    var events = reactive([{ subject: ''}])
 
     const api_url = import.meta.env.VITE_API_URL
 
@@ -18,7 +22,7 @@
         microsoftTeams.get_token().then((token) => {
             app.getContext().then((context: any) => {
                 fetch(api_url + 'calendarevent', {
-                    method: 'get',
+                    method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -31,15 +35,28 @@
                     if (response.ok) {
                         return response.json();
                     } else {
-                        console.log('fetch->getProfileOnBehalfOf: ', response)
+                        if (response.status === 401) {
+                            const msalConfig = {
+                                auth: {
+                                    clientId: import.meta.env.VITE_CLIENT_ID
+                                }
+                            };
+                            const msalInstance = new msal.PublicClientApplication(msalConfig);
+                            msalInstance.handleRedirectPromise();
+
+                            msalInstance.loginPopup({ 
+                                redirectUri: 'http://localhost:5173/auth-end',
+                                scopes: ['calendars.readbasic']
+                            }).then(() => {})
+
+                        }
                     }
                 })
                 .then((responseJson) => {
-                    if (responseJson.error) {
-                        console.log('error', responseJson)
-                    } else {
-                        event.value = responseJson;
-                    }
+                    events = responseJson.value;
+                })
+                .catch((error) => {
+                    console.log('CalendarView.vue-> Catch -> fetch: ', error)
                 })
             })
         })    

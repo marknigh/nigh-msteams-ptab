@@ -23,7 +23,7 @@
     }
 
     function getWeather() {
-        fetch(api_url + '/weather/' + city.value)
+        fetch(api_url + 'weather/' + city.value)
             .then((response) => {
                 return response.json()
             })
@@ -39,7 +39,7 @@
 </script>
 
 <template>
-    <section class="section">    
+    <section class="section">
         <p class="title2 has-text-weight-bold"> Current Weather</p>
             <figure class="is-128x128">
                 <img :src = "context" />

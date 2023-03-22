@@ -11,7 +11,7 @@
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
             app.getContext().then((context: any) => {
-                fetch(api_url + 'getProfileOnBehalfOf', {
+                fetch(api_url + 'getProfileName', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
@@ -35,7 +35,16 @@
                         profile.value = responseJson;
                     }
                 })
+                .catch((error) => {
+                    if (error.statusText === 'INTERACTION_REQUIRED_STATUS_TEXT') {
+                        console.log('INTERACTION_REQUIRED_STATUS_TEXT')
+                    }
+                })
+            }).catch((error) => {
+                console.log('app.getContext(): ', error)
             })
+        }).catch((error) => {
+            console.log('microsoftTeams.get_token: ', error)
         })    
     }) 
 
