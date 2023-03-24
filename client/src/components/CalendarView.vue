@@ -57,8 +57,7 @@
                     }
                 })
                 .then((responseJson) => {
-                    events = [{ subject: 'test', start: new Date()}]
-                    // events = responseJson.value;
+                    events = responseJson.value;
                 })
                 .catch((error) => {
                     console.log('CalendarView.vue-> Catch -> fetch: ', error)
