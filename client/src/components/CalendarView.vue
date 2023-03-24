@@ -2,7 +2,7 @@
     <section class="section">
             <p class="title2 has-text-weight-bold"> Today's Appointments </p>
             <ul class="menu-list" v-for="event in events">
-                <li>test</li>
+                <li>{{ event.subject }}, {{ event.start }}</li>
             </ul>
     </section>
 </template>
@@ -13,7 +13,8 @@
     import { Auth } from '../assets/sso_auth'
     import * as msal from "@azure/msal-browser"
 
-    var events = reactive([{ subject: ''}])
+    var events = reactive([{ subject: '',
+                                start: Date}])
 
     const api_url = import.meta.env.VITE_API_URL
 
