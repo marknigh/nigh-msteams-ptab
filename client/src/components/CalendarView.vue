@@ -13,7 +13,8 @@
     import { Auth } from '../assets/sso_auth'
     import * as msal from "@azure/msal-browser"
 
-    const events = reactive([{ subject: '', start: null }])
+    var events = reactive([{ subject: '', start: null }])
+    
     function startTime (time: any) {
         return new Date(time).toLocaleString()
     }
