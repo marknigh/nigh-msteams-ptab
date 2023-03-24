@@ -2,19 +2,21 @@
     <section class="section">
             <p class="title2 has-text-weight-bold"> Today's Appointments </p>
             <ul class="menu-list" v-for="event in events">
-                <li>{{ event.subject }}, {{ event.start }}</li>
+                <li>{{ event.subject }}, {{ startTime(event.start) }}</li>
             </ul>
     </section>
 </template>
 
 <script setup lang="ts">
     import { app }from "@microsoft/teams-js"
-    import { onBeforeMount, reactive } from "vue"
+    import { onBeforeMount, reactive, computed } from "vue"
     import { Auth } from '../assets/sso_auth'
     import * as msal from "@azure/msal-browser"
 
-    var events = reactive([{ subject: '',
-                                start: Date}])
+    const events = reactive([{ subject: '', start: null }])
+    function startTime (time: any) {
+        return new Date(time).toLocaleString()
+    }
 
     const api_url = import.meta.env.VITE_API_URL
 
@@ -54,6 +56,7 @@
                     }
                 })
                 .then((responseJson) => {
+                    console.log('responseJson: ', responseJson)
                     events = responseJson.value;
                 })
                 .catch((error) => {
