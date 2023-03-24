@@ -13,10 +13,10 @@
     import { Auth } from '../assets/sso_auth'
     import * as msal from "@azure/msal-browser"
 
-    var events = reactive([{ subject: '', start: null }])
+    var events = reactive([{ subject: '', start: Date }])
     
-    function startTime (time: any) {
-        return new Date(time).toLocaleString()
+    function startTime (time: Date) {
+        return time.toLocaleTimeString() 
     }
 
     const api_url = import.meta.env.VITE_API_URL
@@ -57,8 +57,8 @@
                     }
                 })
                 .then((responseJson) => {
-                    console.log('responseJson: ', responseJson)
-                    events = responseJson.value;
+                    events = [{ subject: 'test', start: new Date()}]
+                    // events = responseJson.value;
                 })
                 .catch((error) => {
                     console.log('CalendarView.vue-> Catch -> fetch: ', error)
