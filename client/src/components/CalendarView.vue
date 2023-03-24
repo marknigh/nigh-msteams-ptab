@@ -1,9 +1,9 @@
 <template>
     <section class="section">
         <p class="title2 has-text-weight-bold"> Today's Appointment</p>
-        <p v-for="event in events">
-            {{ event.subject }}
-        </p>
+        <ul v-for="event in events">
+            <li>{{ event.subject }}</li>
+        </ul>
     </section>
 </template>
 
