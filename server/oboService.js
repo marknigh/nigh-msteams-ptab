@@ -11,10 +11,10 @@ async function getOboAccessToken(tenantId, clientSideToken, req) {
         system: {
         loggerOptions: {
             loggerCallback(loglevel, message, containsPii) {
-            if (!containsPii) console.log(message);
+                if (!containsPii) console.log(message);
             },
             piiLoggingEnabled: false,
-            logLevel: msal.LogLevel.Verbose,
+            logLevel: msal.LogLevel.Info,
         }
         }
     };
@@ -23,7 +23,7 @@ async function getOboAccessToken(tenantId, clientSideToken, req) {
     var msalClient = new msal.ConfidentialClientApplication(msalConfig);
   
     // var scopes = ["https://graph.microsoft.com/User.Read"];
-    var scopes = ['calendars.ReadBasic']
+    var scopes = ['calendars.ReadBasic', 'MailboxSettings.Read', 'User.Read']
 
     var oboPromise = new Promise((resolve, reject) => {
         msalClient.acquireTokenOnBehalfOf({
@@ -35,7 +35,6 @@ async function getOboAccessToken(tenantId, clientSideToken, req) {
             resolve(result.accessToken)
         })
         .catch((error) => {
-            console.log(error)
             reject(error)
         }); 
     });

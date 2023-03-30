@@ -1,17 +1,39 @@
 <template>
-    <div>
-
-    </div>
+    <div></div>
 </template>
 
 <script setup lang="ts">
     import * as microsoftTeams from '@microsoft/teams-js'
 
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
+         microsoftTeams.app.getContext().then(async (context) => {
+          const msalConfig = {
+            auth: {
+              clientId: "#{clientId}",
+              authority: `https://login.microsoftonline.com/${context.tid}`,
+              navigateToLoginRequestUrl: false
+            },
+            cache: {
+              cacheLocation: "sessionStorage",
+            },
+          }
 
-    microsoftTeams.app.getContext().then(() => {
-        microsoftTeams.authentication.notifySuccess();
-    })
+          const msalInstance = new window.msal.PublicClientApplication(msalConfig);
+          msalInstance.handleRedirectPromise()
+            .then((tokenResponse) => {
+              if (tokenResponse !== null) {
+                microsoftTeams.authentication.notifySuccess(JSON.stringify({
+                  sessionStorage: sessionStorage
+                }));
+              } else {
+                microsoftTeams.authentication.notifyFailure("Get empty response.");
+              }
+            })
+            .catch((error) => {
+              microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+            });
+        });
+      });
 
 </script>
 

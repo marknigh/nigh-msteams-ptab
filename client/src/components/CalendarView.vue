@@ -7,24 +7,25 @@
     </section>
 </template>
 
-<script setup lang="ts">
+<script setup>
     import { app }from "@microsoft/teams-js"
-    import { onBeforeMount, reactive } from "vue"
+    import { onBeforeMount, ref } from "vue"
     import { Auth } from '../assets/sso_auth'
     import * as msal from "@azure/msal-browser"
 
-    var events = reactive([{ subject: '', start: { dateTime: String} }])
+    const events = ref([]);
     
-    function startTime (time: any) {
-        return new Date(time).toLocaleTimeString() 
+    function startTime(time){
+        console.log(time)
+        return new Date(time).toLocaleTimeString()
     }
 
     const api_url = import.meta.env.VITE_API_URL
 
-    onBeforeMount(() => {
+    onBeforeMount(async () => {
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
-            app.getContext().then((context: any) => {
+            app.getContext().then((context) => {
                 fetch(api_url + 'calendarevent', {
                     method: 'post',
                     headers: {
@@ -37,6 +38,7 @@
                 })
                 .then((response) => {
                     if (response.ok) {
+                        console.log('response: ', response)
                         return response.json();
                     } else {
                         if (response.status === 401) {
@@ -49,15 +51,15 @@
                             msalInstance.handleRedirectPromise();
 
                             msalInstance.loginPopup({ 
-                                redirectUri: 'http://localhost:5173/auth-end',
+                                redirectUri: 'http://localhost:5173/auth-start',
                                 scopes: ['calendars.readbasic']
                             }).then(() => {})
-
                         }
                     }
                 })
                 .then((responseJson) => {
-                    events = responseJson.value;
+                    events.value = responseJson.value;
+                    console.log('events: ', events.value)
                 })
                 .catch((error) => {
                     console.log('CalendarView.vue-> Catch -> fetch: ', error)

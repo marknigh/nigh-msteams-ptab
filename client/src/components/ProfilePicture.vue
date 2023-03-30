@@ -7,13 +7,15 @@
 </template>
 
 <script setup lang="ts">
-    import { app, profile }from "@microsoft/teams-js";
+    import { app }from "@microsoft/teams-js";
     import { onBeforeMount, ref } from "vue";
     import { Auth } from '../assets/sso_auth'
+    import * as msal from "@azure/msal-browser"
 
     const api_url = import.meta.env.VITE_API_URL
 
     const profilePhoto = ref()
+    
     onBeforeMount(() => {
         const microsoftTeams = new Auth()
         microsoftTeams.get_token().then((token) => {
@@ -29,9 +31,34 @@
                     })
                 })
                 .then((response) => {
-                    response.blob().then((data) => {
-                        profilePhoto.value = window.URL.createObjectURL(data)
-                    })
+                    if (response.ok) {
+                        response.blob().then((data) => {
+                            profilePhoto.value = window.URL.createObjectURL(data)
+                        })
+                    } else {
+                        if (response.status === 401) {
+                            const msalConfig = {
+                                auth: {
+                                    clientId: import.meta.env.VITE_CLIENT_ID
+                                }
+                            };
+                            
+                            const msalInstance = new msal.PublicClientApplication(msalConfig);
+                            
+                            msalInstance.handleRedirectPromise().then(() => {
+                                msalInstance.loginPopup({ 
+                                    redirectUri: 'http://localhost:5173/auth/start',
+                                    scopes: ['Calendars.ReadBasic', 'User.Read', 'MailboxSettings.Read'],
+                                    prompt: 'consent'
+                                }).then((response) => {
+                                    console.log(response)
+                                }).catch((error) => {
+                                    console.log(error)
+                                })
+                            })
+
+                        }
+                    }
                     
                 })
             }).catch((error) => {

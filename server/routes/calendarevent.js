@@ -9,7 +9,6 @@ router.post('/', async (req, res) => {
     const tenantId = req.body.tid;
     const clientSideToken = req.body.token;
 
-    
     try{
         const serverSideToken = await getOboAccessToken(tenantId, clientSideToken, req)
         const calendarEvents = await getCalendarEvents(serverSideToken);

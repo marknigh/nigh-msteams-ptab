@@ -5,6 +5,15 @@ async function getCalendarEvents(accessToken) {
     const currentDateTime = new Date().toISOString()
     const endDateTime = new Date(new Date().setHours(23)).toISOString()
 
+    // get timezone from mailboxSettings
+    var mailboxSettingResponse = await fetch('https://graph.microsoft.com/beta/me/mailboxSettings', {
+        method: 'GET',
+        headers: {
+            'authorization': `bearer ${accessToken}`
+        }
+    })
+   
+    var responseData = await mailboxSettingResponse.json()
 
     const url = 'https://graph.microsoft.com/v1.0/me/calendarView?' + new URLSearchParams({
         startDateTime: currentDateTime,
@@ -15,7 +24,7 @@ async function getCalendarEvents(accessToken) {
         {
             method: 'GET',
             headers: {
-                // 'prefer': 'outlook.timezone=\"central daylight time\"',
+                'prefer': `outlook.timezone="${responseData.timeZone}"`,
                 'authorization': `bearer ${accessToken}`
             },
             cache: 'default'
