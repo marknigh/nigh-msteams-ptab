@@ -8,11 +8,10 @@
 
     microsoftTeams.app.initialize().then(() => {
         // Get the tab context, and use the information to navigate to Azure AD login page
-        microsoftTeams.app.getContext().then(async (context) => {
+        microsoftTeams.app.getContext().then(async (context: any) => {
 
-            var currentURL = new URL(window.location);
             var scope = "User.Read Calendars.ReadBasic MailboxSettings.Read";
-            var loginHint = context.user.loginHint;
+            var loginHint = context.user?.loginHint;
 
             const msalConfig = {
                 auth: {

@@ -4,9 +4,10 @@
 
 <script setup lang="ts">
     import * as microsoftTeams from '@microsoft/teams-js'
+    import * as msal from "@azure/msal-browser"
 
     microsoftTeams.app.initialize().then(() => {
-         microsoftTeams.app.getContext().then(async (context) => {
+         microsoftTeams.app.getContext().then(async (context: any) => {
           const msalConfig = {
             auth: {
               clientId: "#{clientId}",
@@ -18,9 +19,9 @@
             },
           }
 
-          const msalInstance = new window.msal.PublicClientApplication(msalConfig);
+          const msalInstance = new msal.PublicClientApplication(msalConfig);
           msalInstance.handleRedirectPromise()
-            .then((tokenResponse) => {
+            .then((tokenResponse: any) => {
               if (tokenResponse !== null) {
                 microsoftTeams.authentication.notifySuccess(JSON.stringify({
                   sessionStorage: sessionStorage
@@ -29,7 +30,7 @@
                 microsoftTeams.authentication.notifyFailure("Get empty response.");
               }
             })
-            .catch((error) => {
+            .catch((error: any) => {
               microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
             });
         });
